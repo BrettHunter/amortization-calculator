@@ -1,0 +1,105 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:100,400);
+
+$main-bg-color: #f1f2f0;
+$accent-blue: #37bbe4;
+$accent-gray: #e1e0dd;
+$accent-black: #35342f;
+$accent-orange: #ec6b2d;
+$accent-red: #dd6464;
+
+body {
+  background-color: $main-bg-color;
+  color: $accent-black;
+  display: flex;
+  justify-content: center;
+  font-family: 'Raleway', sans-serif;
+}
+
+.main-app-container {
+  padding-top: 0.5em;
+  width: 100%;
+}
+
+.main-app-nav {
+  font-size: 2.3em;
+  text-align: center;
+  color: $accent-red;
+  font-weight: 800;
+
+  .tagline {
+    font-size: 0.35em;
+    color: $accent-black;
+    text-transform: uppercase;
+    letter-spacing: 0.3em;
+  }
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 0.5em;
+}
+
+.output-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: 0.5em;
+}
+
+.summary-value {
+  color: $accent-orange;
+  margin: 1em 0.35em;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.summary-label {
+  margin: 1em 0.35em;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+
+.summary-row {
+  margin-top: 0.75em;
+}
+
+.invalid-row {
+  margin-top: 2.0em;
+  padding-top: 1.5em;
+  font-size: 1.10em;
+  color: $accent-red;
+  font-weight: 400;
+}
+
+.amortization-table {
+  font-size: 0.8em;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+footer {
+  font-size: 0.75em;
+  text-align: center;
+  padding-top: 10em;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      color: $accent-blue;
+    }
+  }
+}
+
+#root {
+  width: 100%;
+  background-color: $main-bg-color;
+  color: $accent-black;
+  display: flex;
+  justify-content: center;
+  font-family: 'Raleway', sans-serif;
+}
