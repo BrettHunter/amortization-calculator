@@ -1,7 +1,6 @@
 import React from 'react';
 import AmortizationTableRow from './AmortizationTableRow';
 import AmortizationTableHeader from './AmortizationTableHeader';
-import moment from 'moment';
 import { ScreenClassRender } from 'react-grid-system';
 
 const getStyle = (screen) => {
@@ -25,5 +24,9 @@ const AmortizationTable = (props) => (
     </div>
   </ScreenClassRender>
 );
+
+AmortizationTable.propTypes = {
+  input: React.PropTypes.object,
+};
 
 export default AmortizationTable;

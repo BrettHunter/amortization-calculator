@@ -6,7 +6,7 @@ import { Col, Container } from 'react-grid-system';
 
 module.exports = class Root extends Component {
   render() {
-    const { store } = this.props;
+    const { store } = this.props; // eslint-disable-line react/prop-types
     return (
       <Provider store={store}>
         <Container style={{ width: '100%' }}>

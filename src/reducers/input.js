@@ -5,7 +5,6 @@ import {
  } from '../constants/ActionTypes';
 import { amortizationSchedule } from 'amortization';
 import update from 'react-addons-update';
-import moment from 'moment';
 
 export const defaultState = {
   default: true,
@@ -38,7 +37,7 @@ export default function input(state = defaultState, action) {
       const term = Number(state.term);
       const interestRate = Number(state.interestRate);
 
-      if (!interestRate > 0 || !term > 0 || !loanAmount > 0) {
+      if (!interestRate > 0 || !term > 0 || !loanAmount > 0 || state.beginDate === null) {
         return state;
       }
 

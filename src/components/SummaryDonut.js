@@ -13,4 +13,8 @@ class SummaryDonut extends React.Component {
   }
 }
 
+SummaryDonut.propTypes = {
+  data: React.PropTypes.object
+};
+
 export default SummaryDonut;

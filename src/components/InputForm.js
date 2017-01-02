@@ -42,19 +42,24 @@ class InputForm extends React.Component {
             floatingLabelText="Loan Start Date"
             value={this.props.input.beginDate}
             autoOk
-            onChange={(event, date) => this.props.actions.setBeginDate(event, date)}
+            onChange={(event, date) => this.props.actions.setBeginDate(event, date)} // eslint-disable-line react/jsx-no-bind, max-len
           />
         </Row>
         <Row>
           <RaisedButton
             label="Reset"
             primary
-            onClick={() => this.props.actions.resetAmortization()}
+            onClick={() => this.props.actions.resetAmortization()} // eslint-disable-line react/jsx-no-bind, max-len
           />
         </Row>
       </Form>
     );
   }
 }
+
+InputForm.propTypes = {
+  actions: React.PropTypes.object,
+  input: React.PropTypes.object,
+};
 
 export default InputForm;

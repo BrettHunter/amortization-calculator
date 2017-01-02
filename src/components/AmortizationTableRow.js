@@ -2,7 +2,7 @@ import React from 'react';
 import moment from 'moment';
 import currencyFormatter from 'currency-formatter';
 import { at, sumBy, times } from 'lodash';
-import { Col, Row, Container, ScreenClassRender } from 'react-grid-system';
+import { Col, Row, Container } from 'react-grid-system';
 
 const cf = currencyFormatter.format;
 
@@ -71,29 +71,31 @@ const displaySummaryCell = (content) => (
   </Col>
 );
 
-const AmortizationTableRow = (props) => {
-  return (
-    <Container>
-      <Row>
-        {displayDataCell(displayDateForPayment(props))}
-        {displayDataCell(cf(props.row.payment, { code: 'USD' }))}
-        {displayDataCell(cf(props.row.principalPaymentRounded, { code: 'USD' }))}
-        {displayDataCell(cf(props.row.interestPaymentRounded, { code: 'USD' }))}
-        {displayDataCell(cf(props.row.accInterestRounded, { code: 'USD' }))}
-        {displayDataCell(cf(props.row.principalBalanceRounded, { code: 'USD' }))}
+const AmortizationTableRow = (props) => (
+  <Container>
+    <Row>
+      {displayDataCell(displayDateForPayment(props))}
+      {displayDataCell(cf(props.row.payment, { code: 'USD' }))}
+      {displayDataCell(cf(props.row.principalPaymentRounded, { code: 'USD' }))}
+      {displayDataCell(cf(props.row.interestPaymentRounded, { code: 'USD' }))}
+      {displayDataCell(cf(props.row.accInterestRounded, { code: 'USD' }))}
+      {displayDataCell(cf(props.row.principalBalanceRounded, { code: 'USD' }))}
+    </Row>
+    {shouldShowAnnualSummaryRow(props) &&
+      <Row style={summaryRowStyle}>
+        {displaySummaryCell(displayDateForPayment(props, 'YYYY'))}
+        {displaySummaryCell(displayAnnualTotal(props, 'payment'))}
+        {displaySummaryCell(displayAnnualTotal(props, 'principalPaymentRounded'))}
+        {displaySummaryCell(displayAnnualTotal(props, 'interestPaymentRounded'))}
+        {displaySummaryCell(cf(props.row.accInterestRounded, { code: 'USD' }))}
+        {displaySummaryCell(cf(props.row.principalBalanceRounded, { code: 'USD' }))}
       </Row>
-      {shouldShowAnnualSummaryRow(props) &&
-        <Row style={summaryRowStyle}>
-          {displaySummaryCell(displayDateForPayment(props, 'YYYY'))}
-          {displaySummaryCell(displayAnnualTotal(props, 'payment'))}
-          {displaySummaryCell(displayAnnualTotal(props, 'principalPaymentRounded'))}
-          {displaySummaryCell(displayAnnualTotal(props, 'interestPaymentRounded'))}
-          {displaySummaryCell(cf(props.row.accInterestRounded, { code: 'USD' }))}
-          {displaySummaryCell(cf(props.row.principalBalanceRounded, { code: 'USD' }))}
-        </Row>
-      }
-    </Container>
-  );
+    }
+  </Container>
+);
+
+AmortizationTableRow.propTypes = {
+  row: React.PropTypes.object,
 };
 
 export default AmortizationTableRow;

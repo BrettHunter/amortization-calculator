@@ -1,7 +1,5 @@
 import React from 'react';
-import { Control, Form, actions } from 'react-redux-form';
-import { Row, Col, Input, Button, Switch } from 'react-grid-system';
-import { TextField, Checkbox } from 'material-ui';
+import { Row, Col } from 'react-grid-system';
 import SummaryDonut from './SummaryDonut';
 import AmortizationTable from './AmortizationTable';
 import currencyFormatter from 'currency-formatter';
@@ -12,40 +10,9 @@ class Output extends React.Component {
     super(props, context);
   }
 
-  shouldDisplayOutput() {
-    const { loanAmount, interestRate, term } = this.props.input;
-    return Number(loanAmount) > 0 &&
-      Number(interestRate) > 0 &&
-      Number(term) > 0;
-  }
-
-  calculatePayoffDate() {
-    const { beginDate, term } = this.props.input;
-    return moment(beginDate).add(Number(term), 'years').format('MMMM YYYY');
-  }
-
-  calculateTotalCost() {
-    let { amortization, loanAmount } = this.props.input;
-    loanAmount = Number(loanAmount);
-    if (amortization.length === 0) {
-      return 0;
-    }
-    return amortization[amortization.length - 1].accInterestRounded + loanAmount;
-  }
-
-  calculateMonthlyPayment() {
-    const { amortization } = this.props.input;
-    if (amortization.length === 0) {
-      return 0;
-    }
-    return amortization[0].payment;
-  }
-
   getSummaryDonutData() {
     const { loanAmount } = this.props.input;
     const totalInterest = this.calculateTotalCost() - loanAmount;
-    console.log('loanAmount', loanAmount);
-    console.log('totalInterest', totalInterest);
     const data = {
       labels: [
         'principal',
@@ -66,6 +33,36 @@ class Output extends React.Component {
       ]
     };
     return data;
+  }
+
+  calculatePayoffDate() {
+    const { beginDate, term } = this.props.input;
+    return moment(beginDate).add(Number(term), 'years').format('MMMM YYYY');
+  }
+
+  calculateTotalCost() {
+    let { loanAmount } = this.props.input;
+    const { amortization } = this.props.input;
+    loanAmount = Number(loanAmount);
+    if (amortization.length === 0) {
+      return 0;
+    }
+    return amortization[amortization.length - 1].accInterestRounded + loanAmount;
+  }
+
+  calculateMonthlyPayment() {
+    const { amortization } = this.props.input;
+    if (amortization.length === 0) {
+      return 0;
+    }
+    return amortization[0].payment;
+  }
+
+  shouldDisplayOutput() {
+    const { loanAmount, interestRate, term } = this.props.input;
+    return Number(loanAmount) > 0 &&
+      Number(interestRate) > 0 &&
+      Number(term) > 0;
   }
 
   render() {
@@ -122,5 +119,9 @@ class Output extends React.Component {
     );
   }
 }
+
+Output.propTypes = {
+  input: React.PropTypes.object
+};
 
 export default Output;

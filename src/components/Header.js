@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Header = (props) => (
+const Header = () => (
   <div className="main-app-nav">
     <div>
      Amortization Calculator
